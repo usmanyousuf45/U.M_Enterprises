@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Poultry | U.M. Enterprises</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/page-nav-transition.css">
+
+    <noscript><style>#pagePreloader{display:none!important}header .logo,header nav,header .hamburger{opacity:1!important;transform:none!important;animation:none!important}</style></noscript>
+
+</head>
+
+<body class="page-detail page-detail--poultry">
+
+    <div id="pagePreloader" class="page-preloader" aria-busy="true" aria-label="Loading">
+        <div class="page-preloader__card">
+            <div class="page-preloader__ring" aria-hidden="true"></div>
+            <div class="page-preloader__logo logo">
+                <div class="logo-box">
+                    <span class="logo-um">U.M.</span>
+                    <span class="logo-enterprises">ENTERPRISES</span>
+                </div>
+                <span class="logo-tagline">Animal Nutrition,<br>Health &amp; Diagnostics</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="umPageShell" class="um-page-shell">
+
+    <section class="detail-hero">
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+
+            <div class="logo-box">
+
+                <span class="logo-um">U.M.</span>
+
+                <span class="logo-enterprises">ENTERPRISES</span>
+
+            </div>
+
+            <span class="logo-tagline">
+                Animal Nutrition,<br>
+                Health &amp; Diagnostics
+            </span>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="index.html#home">Home</a></li>
+
+                <li><a href="index.html#about">About Us</a></li>
+
+                <li><a href="#">Divisions</a></li>
+
+                <li><a href="products.html" class="active">Products</a></li>
+
+                <li><a href="#">Network</a></li>
+
+                <li><a href="index.html#contact">Contact Us</a></li>
+
+                <li><a href="#">Careers</a></li>
+
+            </ul>
+
+        </nav>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </header>
+
+
+    <!-- MOBILE NAV -->
+
+    <div class="mobile-nav" id="mobileNav">
+
+        <button class="mobile-nav-close" id="mobileNavClose">
+            &times;
+        </button>
+
+        <a href="index.html#home" onclick="closeMobileNav()">Home</a>
+
+        <a href="index.html#about" onclick="closeMobileNav()">About Us</a>
+
+        <a href="#" onclick="closeMobileNav()">Divisions</a>
+
+        <a href="products.html" class="active" onclick="closeMobileNav()">Products</a>
+
+        <a href="#" onclick="closeMobileNav()">Network</a>
+
+        <a href="index.html#contact" onclick="closeMobileNav()">Contact Us</a>
+
+        <a href="#" onclick="closeMobileNav()">Careers</a>
+
+    </div>
+
+    <div class="hero-cloud hero-cloud-left" aria-hidden="true">
+        <img src="img/cloud.png" alt="">
+    </div>
+    <div class="hero-cloud hero-cloud-right" aria-hidden="true">
+        <img src="img/cloud.png" alt="">
+    </div>
+
+    <!-- DETAIL WRAP -->
+
+    <div class="detail-wrap">
+
+        <!-- MAIN CONTENT -->
+
+        <main class="detail-main">
+
+            <div class="detail-content">
+
+                <h1>POULTRY</h1>
+
+                <p>
+                    We facilitate poultry industry in overcoming their hurdles/threats
+                    to achieve their Production goals by facilitating the complete
+                    management guide and consultation in Disease management, Feed
+                    management, Vaccination Management &amp; Biosecurity.
+                </p>
+
+                <button class="detail-btn" type="button">
+                    More details
+                </button>
+
+                <a href="products.html" class="back-link">
+                    Back to products
+                </a>
+
+            </div>
+
+            <div class="detail-visual">
+                <img src="img/chiken.png" alt="Poultry" class="detail-animal">
+            </div>
+
+        </main>
+
+    </div>
+
+    </section>
+
+    </div>
+
+    <!-- SCRIPT -->
+
+    <script src="js/page-preloader.js"></script>
+
+    <script src="js/page-nav-transition.js"></script>
+
+    <script>
+
+        (function(){
+
+            const body = document.body;
+
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+            const mobileNav = document.getElementById('mobileNav');
+
+            const mobileNavClose = document.getElementById('mobileNavClose');
+
+
+            function closeMobileNav(){
+
+                if(!mobileNav) return;
+
+                mobileNav.classList.remove('open');
+
+                body.style.overflow = '';
+
+            }
+
+            window.closeMobileNav = closeMobileNav;
+
+
+            if(hamburgerBtn && mobileNav){
+
+                hamburgerBtn.addEventListener('click', function(){
+
+                    mobileNav.classList.add('open');
+
+                    body.style.overflow = 'hidden';
+
+                });
+
+            }
+
+
+            if(mobileNavClose){
+
+                mobileNavClose.addEventListener('click', closeMobileNav);
+
+            }
+
+        })();
+
+    </script>
+
+</body>
+
+</html>

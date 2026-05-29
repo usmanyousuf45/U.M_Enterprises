@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | U.M. Enterprises</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/page-nav-transition.css">
+    <noscript><style>#pagePreloader{display:none!important}header .logo,header.topbar .nav-side,header.topbar .menu-btn{opacity:1!important;transform:none!important;animation:none!important}</style></noscript>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #d6edf3;
+            perspective: 1200px;
+        }
+        .page {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding: 16px 4.8% 0;
+            background: url("img/ChatGPT Image May 5, 2026, 05_21_42 PM.png") no-repeat center center / cover;
+        }
+        .cloud {
+            position: absolute;
+            top: 58px;
+            width: min(400px, 30vw);
+            opacity: 0.72;
+            transform-style: preserve-3d;
+            will-change: transform, filter;
+            animation-duration: 9s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        .cloud.left {
+            left: -22px;
+            animation-name: cloud3dLeft;
+        }
+        .cloud.right {
+            right: -8px;
+            transform: scaleX(-1);
+            animation-name: cloud3dRight;
+            animation-duration: 10s;
+        }
+
+        .topbar {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            animation: fadeSlideDown 0.8s ease both;
+        }
+        .menu-btn {
+            display: none;
+            border: 1px solid rgba(15, 95, 58, 0.2);
+            background: rgba(255, 255, 255, 0.7);
+            color: #1a5c2a;
+            font-size: 1rem;
+            padding: 8px 9px;
+            border-radius: 10px;
+            cursor: pointer;
+            min-width: 44px;
+            min-height: 40px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+        .menu-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .menu-btn span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: #1a5c2a;
+            border-radius: 2px;
+            margin: 3px 0;
+            transition: transform 0.3s ease, opacity 0.25s ease;
+        }
+        .menu-btn.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-btn.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        .logo { text-align: center; line-height: 1; }
+        .logo-box {
+            border-bottom: 3px solid #1d5f3a;
+            min-width: 98px;
+            padding-bottom: 2px;
+        }
+        .logo-um {
+            display: block;
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #09a25d;
+            line-height: 0.86;
+        }
+        .logo-enterprises {
+            display: block;
+            font-size: 0.60rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            color: #2c2c2c;
+        }
+        .logo-tagline {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.7rem;
+            line-height: 1.2;
+            color: #2f4750;
+            font-style: italic;
+        }
+        .nav-side { margin-top: 32px; }
+        .nav-side ul { list-style: none; display: flex; gap: 28px; }
+        .nav-side li {
+            opacity: 0;
+            transform: translateY(-8px);
+            animation: none;
+        }
+        body.preloader-done .nav-side li {
+            animation: navItemDrop 0.45s ease forwards;
+        }
+        body.preloader-done .nav-side li:nth-child(1) { animation-delay: 0.06s; }
+        body.preloader-done .nav-side li:nth-child(2) { animation-delay: 0.11s; }
+        body.preloader-done .nav-side li:nth-child(3) { animation-delay: 0.16s; }
+        body.preloader-done .nav-side li:nth-child(4) { animation-delay: 0.21s; }
+        body.preloader-done .nav-side li:nth-child(5) { animation-delay: 0.26s; }
+        body.preloader-done .nav-side li:nth-child(6) { animation-delay: 0.31s; }
+        body.preloader-done .nav-side li:nth-child(7) { animation-delay: 0.36s; }
+        .nav-side a {
+            position: relative;
+            text-decoration: none;
+            color: #1f2823;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: color 0.25s ease;
+        }
+        .nav-side a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background: #09a25d;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 0.28s ease;
+        }
+        .nav-side a:hover::after,
+        .nav-side a.active::after {
+            transform: scaleX(1);
+        }
+        .nav-side a:hover {
+            color: #09a25d;
+        }
+        .nav-side a.active { color: #09a25d; }
+        .register-wrap {
+            display: flex;
+            border: 1px solid #d9d9d9;
+            background: #fff;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            height: 30px;
+            animation: fadeSlideDown 0.9s ease both;
+        }
+        .register-input {
+            border: none;
+            outline: none;
+            width: 145px;
+            padding: 0 10px;
+            font-size: 0.54rem;
+            color: #666;
+            letter-spacing: 0.3px;
+            text-transform: lowercase;
+        }
+        .register-wrap button {
+            border: none;
+            background: #07a75f;
+            color: #fff;
+            font-size: 0.56rem;
+            font-weight: 700;
+            padding: 0 13px;
+        }
+        .register-row {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 18px;
+            padding-right: 24px;
+        }
+
+        .cards {
+            position: relative;
+            z-index: 8;
+            margin: 52px auto 0;
+            width: min(600px, 70vw);
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            align-items: start;
+            perspective: 1800px;
+            transform-style: preserve-3d;
+        }
+
+        .card-section {
+            display: block;
+            position: relative;
+            overflow: visible;
+            text-decoration: none;
+            color: inherit;
+            opacity: 0;
+            transform-origin: 50% 58%;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            animation: cardSpinIn 1.45s cubic-bezier(0.2, 0.82, 0.24, 1) forwards;
+            will-change: transform, opacity;
+        }
+        .cards .card-section:nth-child(1) { animation-delay: 0.15s; }
+        .cards .card-section:nth-child(2) { animation-delay: 0.3s; }
+        .cards .card-section:nth-child(3) { animation-delay: 0.45s; }
+        .cards .card-section:nth-child(4) { animation-delay: 0.6s; }
+        .card {
+            border-radius: 14px;
+            height: 230px;
+            background: linear-gradient(180deg, #10b666 0 30%, #095d36 30% 100%);
+            box-shadow: 0 10px 16px rgba(10, 72, 42, 0.24);
+            color: #fff;
+            padding: 10px 10px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+            cursor: pointer;
+            z-index: 2;
+            will-change: transform;
+        }
+        .card:hover {
+            transform: translateY(-14px) scale(1.03);
+            box-shadow: 0 20px 34px rgba(8, 58, 34, 0.42);
+        }
+        .card h2 {
+            font-size: 0.82rem;
+            line-height: 1.05;
+            margin-top: 8px;
+            margin-bottom: 7px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            color: #f7fff9;
+            text-align: center;
+        }
+        .card p {
+            font-size: 0.55rem;
+            line-height: 1.35;
+            color: rgba(220, 247, 233, 0.95);
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            top: 84px;
+            text-align: center;
+        }
+
+
+        .section-img {
+            position: absolute;
+            z-index: 9;
+            pointer-events: auto;
+            object-fit: contain;
+            transition: transform 0.35s ease, filter 0.35s ease;
+            cursor: pointer;
+        }
+
+        .poultry-img {
+            left: -4%;
+            top: 150px;
+            width: min(150px, 14vw);
+            z-index: 7;
+        }
+
+        .large-img {
+            left: calc(-32% + 3px);
+            top: 100px;
+            width: min(230px, 16vw);
+            z-index: 8;
+        }
+
+        .diagnostic-img {
+            left: 4%;
+            top: 110px;
+            width: min(150px, 11vw);
+            z-index: 10;
+        }
+
+        .feed-img {
+            left: -6%;
+            top: 90px;
+            width: min(170px, 12vw);
+            z-index: 9;
+        }
+
+        .card-section:hover .card,
+        .card-section.hovered .card,
+        .card-section.active .card {
+            transform: translateY(-14px) scale(1.03);
+            box-shadow: 0 20px 34px rgba(8, 58, 34, 0.42);
+            filter: brightness(1.04);
+        }
+
+        .card-section:hover .section-img,
+        .card-section.hovered .section-img,
+        .card-section.active .section-img {
+            transform: translateY(-8px) scale(1.03);
+            filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.32));
+        }
+
+        @keyframes cloud3dLeft {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1);
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
+            }
+            25% {
+                transform: translate3d(18px, -4px, 32px) rotateX(2deg) rotateY(-4deg) scale(1.03);
+                filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.12));
+            }
+            50% {
+                transform: translate3d(32px, 2px, 18px) rotateX(-1deg) rotateY(3deg) scale(1.02);
+            }
+            75% {
+                transform: translate3d(14px, 6px, 28px) rotateX(1deg) rotateY(-2deg) scale(1.03);
+            }
+        }
+
+        @keyframes cloud3dRight {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scaleX(-1) rotateX(0deg) rotateY(0deg) scale(1);
+                filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
+            }
+            25% {
+                transform: translate3d(-16px, -3px, 30px) scaleX(-1) rotateX(2deg) rotateY(4deg) scale(1.03);
+                filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.12));
+            }
+            50% {
+                transform: translate3d(-30px, 2px, 16px) scaleX(-1) rotateX(-1deg) rotateY(-3deg) scale(1.02);
+            }
+            75% {
+                transform: translate3d(-12px, 5px, 26px) scaleX(-1) rotateX(1deg) rotateY(2deg) scale(1.03);
+            }
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes navItemDrop {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardSpinIn {
+            0% {
+                opacity: 0;
+                transform: translate3d(95vw, 42px, -240px) rotateY(420deg) rotateX(28deg) rotateZ(24deg) scale(0.58);
+            }
+            38% {
+                opacity: 0.72;
+                transform: translate3d(34vw, 8px, -80px) rotateY(250deg) rotateX(16deg) rotateZ(14deg) scale(0.78);
+            }
+            62% {
+                opacity: 1;
+                transform: translate3d(8vw, -8px, 40px) rotateY(95deg) rotateX(-8deg) rotateZ(-8deg) scale(0.96);
+            }
+            82% {
+                transform: translate3d(-2vw, 0, 8px) rotateY(18deg) rotateX(4deg) rotateZ(3deg) scale(1.03);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-section {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .mobile-menu {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(7, 24, 15, 0.95) 0%, rgba(8, 31, 20, 0.97) 100%);
+            z-index: 500;
+            padding: 88px 22px 34px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-16px) scale(0.985);
+            transition: opacity 0.32s ease, transform 0.32s ease, visibility 0.32s ease;
+        }
+        .mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+        .mobile-menu-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 1.7rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.22s ease, background-color 0.22s ease;
+        }
+        .mobile-menu-close:hover {
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .mobile-menu a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.08rem;
+            text-align: center;
+            padding: 11px 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            width: min(320px, 92%);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: color 0.3s, background-color 0.3s, transform 0.25s, opacity 0.26s;
+        }
+        .mobile-menu.open a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .mobile-menu.open a:nth-of-type(1) { transition-delay: 0.03s; }
+        .mobile-menu.open a:nth-of-type(2) { transition-delay: 0.06s; }
+        .mobile-menu.open a:nth-of-type(3) { transition-delay: 0.09s; }
+        .mobile-menu.open a:nth-of-type(4) { transition-delay: 0.12s; }
+        .mobile-menu.open a:nth-of-type(5) { transition-delay: 0.15s; }
+        .mobile-menu.open a:nth-of-type(6) { transition-delay: 0.18s; }
+        .mobile-menu.open a:nth-of-type(7) { transition-delay: 0.21s; }
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            color: #00A651;
+            background: rgba(255, 255, 255, 0.09);
+            transform: translateY(-1px);
+        }
+        .mobile-register-row {
+            display: none;
+            position: relative;
+            z-index: 12;
+            justify-content: flex-end;
+            margin-top: 0;
+            padding-right: 0;
+        }
+        .mobile-register-row .register-wrap {
+            height: 32px;
+        }
+        .mobile-register-row .register-input {
+            width: 148px;
+        }
+
+        @media (max-width: 1024px) {
+            .cloud {
+                position: fixed;
+            }
+            .page {
+                padding: 12px 4% 20px;
+                background:
+                    linear-gradient(
+                        180deg,
+                        rgba(220, 241, 246, 0.34) 0%,
+                        rgba(239, 225, 169, 0.22) 52%,
+                        rgba(163, 214, 112, 0.22) 100%
+                    ),
+                    url("img/ChatGPT Image May 5, 2026, 05_21_42 PM.png") no-repeat center 32% / cover;
+            }
+            .nav-side, .register-row { display: none; }
+            .menu-btn { display: inline-block; }
+            .topbar {
+                align-items: flex-start;
+                position: sticky;
+                top: 0;
+                z-index: 260;
+                background: linear-gradient(180deg, rgba(186, 233, 245, 0.92) 0%, rgba(186, 233, 245, 0.62) 100%);
+                backdrop-filter: blur(3px);
+                -webkit-backdrop-filter: blur(3px);
+                padding: 12px 5%;
+                flex-wrap: wrap;
+                row-gap: 6px;
+            }
+            .logo-um { font-size: 1.6rem; }
+            .logo-enterprises { font-size: 0.5rem; }
+            .logo-tagline { font-size: 0.58rem; }
+            .menu-btn {
+                padding: 7px 8px;
+                border-radius: 9px;
+                min-height: 38px;
+                min-width: 40px;
+            }
+            .menu-btn span {
+                width: 20px;
+                height: 2.5px;
+            }
+            .mobile-register-row {
+                display: flex;
+                position: static;
+                flex-basis: 100%;
+                width: 100%;
+                order: 3;
+                justify-content: flex-end;
+                margin-top: 2px;
+                padding-right: 0;
+            }
+            .cards {
+                margin-top: 28px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: min(430px, 92%);
+                gap: 12px;
+            }
+            .card-section {
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                position: relative;
+                overflow: visible;
+            }
+            .cards .card-section:nth-child(-n+2) {
+                margin-top: -12px;
+            }
+            #card-diagnostic,
+            #card-feed-additives {
+                margin-top: 20px;
+            }
+            .section-img {
+                position: absolute;
+                left: 50%;
+                top: 84%;
+                transform: translate(-50%, -50%);
+                width: 96px;
+                max-width: none;
+                margin: 0;
+                filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.22));
+                z-index: 9;
+            }
+            .card-section:hover .section-img,
+            .card-section.hovered .section-img,
+            .card-section.active .section-img {
+                transform: translate(-50%, -58%) scale(1.03);
+                filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.32));
+            }
+            .card {
+                height: auto;
+                min-height: 210px;
+                border-radius: 10px;
+                padding: 8px 8px 12px;
+            }
+            .card h2 {
+                font-size: 0.84rem;
+                margin-top: 2px;
+            }
+            #card-poultry .card h2,
+            #card-diagnostic .card h2 {
+                margin-top: 10px;
+            }
+            .card p {
+                position: static;
+                font-size: 0.5rem;
+                line-height: 1.4;
+                margin-top: 44px;
+            }
+            #card-poultry .card p,
+            #card-diagnostic .card p {
+                margin-top: 54px;
+            }
+            .poultry-img { width: 132px; }
+            .large-img { width: 164px; top: 80%; }
+            .diagnostic-img { width: 118px; }
+            .feed-img { width: 128px; }
+            .cloud { width: min(300px, 66vw); top: 58px; opacity: 0.62; }
+            .cloud.right { top: 78px; }
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                margin-top: 22px;
+                width: min(420px, 92%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="pagePreloader" class="page-preloader" aria-busy="true" aria-label="Loading">
+        <div class="page-preloader__card">
+            <div class="page-preloader__ring" aria-hidden="true"></div>
+            <div class="page-preloader__logo logo">
+                <div class="logo-box">
+                    <span class="logo-um">U.M.</span>
+                    <span class="logo-enterprises">ENTERPRISES</span>
+                </div>
+                <span class="logo-tagline">Animal Nutrition,<br>Health &amp; Diagnostics</span>
+            </div>
+        </div>
+    </div>
+    <div id="umPageShell" class="um-page-shell">
+    <div class="page">
+        <img src="img/cloud.png" alt="" class="cloud left">
+        <img src="img/cloud.png" alt="" class="cloud right">
+
+        <header class="topbar">
+            <div class="logo">
+                <div class="logo-box">
+                    <span class="logo-um">U.M.</span>
+                    <span class="logo-enterprises">ENTERPRISES</span>
+                </div>
+                <span class="logo-tagline">Animal Nutrition,<br>Health &amp; Diagnostics</span>
+            </div>
+            <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="mobile-register-row">
+                <div class="register-wrap">
+                    <input id="registerInputMobile" class="register-input" type="text" placeholder="www.yourwebsite.com" aria-label="Website URL">
+                    <button id="registerBtnMobile" type="button">REGISTER NOW</button>
+                </div>
+            </div>
+            <div class="nav-side">
+                <ul>
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="#">Divisions</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="#">Network</a></li>
+                    <li><a href="index.html#contact">Contact Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+        </header>
+        <div id="mobileMenu" class="mobile-menu">
+            <button id="mobileMenuClose" class="mobile-menu-close" aria-label="Close menu">&times;</button>
+            <a href="index.html#home">Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="#">Divisions</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="#">Network</a>
+            <a href="index.html#contact">Contact Us</a>
+            <a href="#">Careers</a>
+        </div>
+        <div class="register-row">
+            <div class="register-wrap">
+                <input id="registerInput" class="register-input" type="text" placeholder="www.yourwebsite.com" aria-label="Website URL">
+                <button id="registerBtn" type="button">REGISTER NOW</button>
+            </div>
+        </div>
+
+        <div class="cards">
+            <section class="card-section" id="card-poultry" data-card="poultry">
+                <article class="card card-poultry">
+                    <h2>POULTRY</h2>
+                    <p>We follow globally modern ways in poultry health and poultry farming technologies.</p>
+                </article>
+                <img src="img/chicken-3d.png" alt="Poultry visual" class="section-img poultry-img">
+            </section>
+
+            <section class="card-section" id="card-large-animal" data-card="large">
+                <article class="card card-large">
+                    <h2>LARGE<br>ANIMAL</h2>
+                    <p>Diversified health portfolio for dairy and beef with concept based solutions.</p>
+                </article>
+                <img src="img/cow img 2.png" alt="Large animal visual" class="section-img large-img">
+            </section>
+
+            <section class="card-section" id="card-diagnostic" data-card="diagnostic">
+                <article class="card">
+                    <h2>DIAGNOSTIC</h2>
+                    <p>In-house backed support with field and lab based diagnostics for reliable decisions.</p>
+                </article>
+                <img src="img/microscope.png" alt="Diagnostic visual" class="section-img diagnostic-img">
+            </section>
+
+            <section class="card-section" id="card-feed-additives" data-card="feed">
+                <article class="card">
+                    <h2>FEED<br>ADDATIVES</h2>
+                    <p>Feed solutions for maximizing performance and productivity with quality additives.</p>
+                </article>
+                <img src="img/feed additives.png" alt="Feed additives visual" class="section-img feed-img">
+            </section>
+        </div>
+    </div>
+    </div>
+    <script src="js/page-preloader.js"></script>
+    <script src="js/page-nav-transition.js"></script>
+    <script>
+        (function () {
+            const registerInput = document.getElementById('registerInput');
+            const registerBtn = document.getElementById('registerBtn');
+            const registerInputMobile = document.getElementById('registerInputMobile');
+            const registerBtnMobile = document.getElementById('registerBtnMobile');
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const cardSections = document.querySelectorAll('.card-section');
+            const cardRoutes = {
+                poultry: 'poultry.html',
+                large: 'large-animal.html',
+                diagnostic: 'diagnostics.html',
+                feed: 'feed-additives.html'
+            };
+
+            function normalizeUrl(value) {
+                const raw = value.trim();
+                if (!raw) return '';
+                if (/^https?:\/\//i.test(raw)) return raw;
+                return 'https://' + raw;
+            }
+
+            function handleRegister(inputEl) {
+                if (!inputEl) return;
+                const normalized = normalizeUrl(inputEl.value);
+                if (!normalized) {
+                    alert('Please enter website URL first.');
+                    inputEl.focus();
+                    return;
+                }
+                try {
+                    const url = new URL(normalized);
+                    window.open(url.toString(), '_blank', 'noopener,noreferrer');
+                } catch (e) {
+                    alert('Please enter a valid website URL.');
+                    inputEl.focus();
+                }
+            }
+
+            if (registerBtn) {
+                registerBtn.addEventListener('click', function () { handleRegister(registerInput); });
+            }
+
+            if (registerInput) {
+                registerInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') handleRegister(registerInput);
+                });
+            }
+
+            if (registerBtnMobile) {
+                registerBtnMobile.addEventListener('click', function () { handleRegister(registerInputMobile); });
+            }
+            if (registerInputMobile) {
+                registerInputMobile.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') handleRegister(registerInputMobile);
+                });
+            }
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function () {
+                    mobileMenu.classList.add('open');
+                    menuBtn.classList.add('active');
+                    menuBtn.setAttribute('aria-expanded', 'true');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            if (mobileMenuClose && mobileMenu) {
+                mobileMenuClose.addEventListener('click', function () {
+                    mobileMenu.classList.remove('open');
+                    if (menuBtn) {
+                        menuBtn.classList.remove('active');
+                        menuBtn.setAttribute('aria-expanded', 'false');
+                    }
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (cardSections.length) {
+                function goCardPage(url) {
+                    if (window.umNavigateWithTransition) window.umNavigateWithTransition(url);
+                    else window.location.href = url;
+                }
+                cardSections.forEach(function (section) {
+                    const card = section.querySelector('.card');
+                    const image = section.querySelector('.section-img');
+
+                    section.addEventListener('mouseenter', function () {
+                        section.classList.add('hovered');
+                    });
+                    section.addEventListener('mouseleave', function () {
+                        section.classList.remove('hovered');
+                    });
+
+                    section.addEventListener('click', function () {
+                        const key = section.getAttribute('data-card');
+                        if (key && cardRoutes[key]) {
+                            goCardPage(cardRoutes[key]);
+                            return;
+                        }
+                        const alreadyActive = section.classList.contains('active');
+                        cardSections.forEach(function (item) { item.classList.remove('active'); });
+                        if (!alreadyActive) section.classList.add('active');
+                    });
+                    if (card) {
+                        card.addEventListener('click', function () {
+                            const key = section.getAttribute('data-card');
+                            if (key && cardRoutes[key]) {
+                                goCardPage(cardRoutes[key]);
+                                return;
+                            }
+                            const alreadyActive = section.classList.contains('active');
+                            cardSections.forEach(function (item) { item.classList.remove('active'); });
+                            if (!alreadyActive) section.classList.add('active');
+                        });
+                    }
+                    if (image) {
+                        image.addEventListener('mouseenter', function () {
+                            cardSections.forEach(function (item) { item.classList.remove('active'); });
+                            section.classList.add('active');
+                        });
+                        image.addEventListener('click', function () {
+                            const key = section.getAttribute('data-card');
+                            if (key && cardRoutes[key]) {
+                                goCardPage(cardRoutes[key]);
+                                return;
+                            }
+                            const alreadyActive = section.classList.contains('active');
+                            cardSections.forEach(function (item) { item.classList.remove('active'); });
+                            if (!alreadyActive) section.classList.add('active');
+                        });
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
